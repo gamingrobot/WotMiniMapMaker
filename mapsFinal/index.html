@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<title>World of Tanks MiniMap Viewer</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="main.css"/>
+</head>
+
+
+<body>
+    <div class="container" style="margin-left:auto; margin-right:auto; width:543px;">
+        <h1>World of Tanks MiniMap Viewer</h1>
+        <form name="pds">
+            <select name="Maps" id="mapsel" >
+            </select>
+            <select name="Game" id="gamesel" >
+            </select>
+        </form><br/>
+        <img src="ajax-loader.gif" id="loaderimg"></img>
+        <img src="" id="minimap"></img>
+        <div style="display:none;"><img src="" id="prefeching"></div>
+
+	</div>
+    
+    <script type="text/javascript">
+    var maps = [
+        ["19_monastery", "Abbey", ["ctf"]],
+        ["31_airfield", "Airfield", ["ctf"]],
+        ["38_mannerheim_line", "Arctic Region", ["ctf"]],
+        ["18_cliff", "Cliff", ["ctf"]],
+        ["51_asia", "Dragon Ridge", ["ctf"]],
+        ["29_el_hallouf", "El Halluf", ["ctf", "dom"]],
+        ["06_ensk", "Ensk", ["ctf", "dom"]],
+        ["13_erlenberg", "Erlenberg", ["ctf", "ass"]],
+        ["36_fishing_bay", "Fisherman's Bay", ["ctf"]],
+        ["33_fjord", "Fjords", ["ctf"]],
+        ["04_himmelsdorf", "Himmelsdorf", ["ctf", "dom"]],
+        ["45_north_america", "Highway", ["ctf"]],
+        ["01_karelia", "Karelia", ["ctf", "ass"]],
+        ["15_komarin", "Komarin", ["ctf"]],
+        ["07_lakeville", "Lakeville", ["ctf"]],
+        ["44_north_america", "Live Oaks", ["ctf"]],
+        ["02_malinovka", "Malinovka", ["ctf", "ass", "dom"]],
+        ["10_hills", "Mines", ["ctf"]],
+        ["37_caucasus", "Mountain Pass", ["ctf"]],
+        ["11_murovanka", "Murovanka", ["ctf", "dom"]],
+        ["03_campania", "Province", ["ctf"]],
+        ["05_prohorovka", "Prokhorovka", ["ctf"]],
+        ["34_redshire", "Redshire", ["ctf"]],
+        ["08_ruinberg", "Ruinberg", ["ctf", "dom"]],
+        ["28_desert", "Sand River", ["ctf", "ass", "dom"]],
+        ["42_north_america", "Seaport", ["ctf"]],
+        ["47_canada_a", "Serene Coast", ["ctf"]],
+        ["14_siegfried_line", "Siegfried Line", ["ctf", "dom"]],
+        ["39_crimea", "South Coast", ["ctf"]],
+        ["35_steppes", "Steppes", ["ctf", "dom"]],
+        ["22_slough", "Swamp", ["ctf"]],
+        ["23_westfeld", "Westfield", ["ctf", "ass"]],
+        ["17_munchen", "Widepark", ["ctf"]]
+    ]
+
+    $(window).load(function () {
+        $("#minimap").hide();
+        $("#minimap").load(function () { $("#loaderimg").hide(); $("#minimap").show(); });
+        $('#minimap').attr('src', maps[0][0] + '_ctf.png');
+        for (var i=0; i < maps.length;++i){
+            $('<option/>').val(i).html(maps[i][1]).appendTo('#mapsel');
+        }
+        if (maps[0][2].length === 1){
+            $("#gamesel").attr("disabled", true);
+        }
+        else {
+            $("#gamesel").attr("disabled", false);
+        }
+        for (var i=0; i < maps[0][2].length;++i){
+            var gamet = maps[0][2][i]
+            var gamestr = ""
+            if (gamet === "ctf"){
+                gamestr = "Standard"
+            }
+            else if (gamet === "ass"){
+                gamestr = "Assault"
+            }
+            else if (gamet === "dom"){
+                gamestr = "Encounter"
+            }
+            $('<option/>').val(i).html(gamestr).appendTo('#gamesel');
+        }
+        /*for (var i=0; i < maps.length;++i){
+            for (var j=0; j < maps[i][2].length;++j){
+                $('#prefeching').attr('src', maps[i][0] + "_" + maps[i][2][j] + ".png");
+            }
+        }*/
+    });
+    $('#mapsel').change(function () {
+        var sel = $('#mapsel :selected').attr('value')
+        $('#gamesel').empty();
+        if (maps[sel][2].length === 1){
+            $("#gamesel").attr("disabled", true);
+        }
+        else {
+            $("#gamesel").attr("disabled", false);
+        }
+        for (var i=0; i < maps[sel][2].length;++i){
+            var gamet = maps[sel][2][i]
+            var gamestr = ""
+            if (gamet === "ctf"){
+                gamestr = "Standard"
+            }
+            else if (gamet === "ass"){
+                gamestr = "Assault"
+            }
+            else if (gamet === "dom"){
+                gamestr = "Encounter"
+            }
+            $('<option/>').val(i).html(gamestr).appendTo('#gamesel');
+        }
+        $("#loaderimg").show();
+        $("#minimap").hide();
+        $("#minimap").load(function () { $("#loaderimg").hide(); $("#minimap").show(); });
+        $('#minimap').attr('src', maps[sel][0] + '_ctf.png');
+    });
+    $('#gamesel').change(function () {
+        var mapsel = $('#mapsel :selected').attr('value')
+        var sel = $('#gamesel :selected').attr('value')
+        var gamet = maps[mapsel][2][sel]
+        $("#loaderimg").show();
+        $("#minimap").hide();
+        $("#minimap").load(function () { $("#loaderimg").hide(); $("#minimap").show(); });
+        $('#minimap').attr('src', maps[mapsel][0] + '_' + gamet  + '.png');
+    });
+    </script>
+
+</body>
+</html>

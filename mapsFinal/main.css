@@ -1,0 +1,18 @@
+body {
+    text-align: center;
+    height: 100%;
+    font-size:12px;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#979899;
+    background-color:#000;
+	background-image:url(bg.jpg);
+	background-repeat:no-repeat;
+	background-position:center 0;
+	background-attachment:fixed;
+    position: relative;
+}
+h1 { text-align: center; color: white; text-shadow: 0px 0px 20px #DDD; }
+h1{margin-bottom:18px;font-size:30px;line-height:36px;}
+form {
+  text-align: center;
+}
