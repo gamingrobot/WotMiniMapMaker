@@ -1,0 +1,5 @@
+D:\Projects\Game\wotmaps\mapviewer\xmlconverter\xmlconverter\xmlconverter\obj\x86\Release\ResolveAssemblyReference.cache
+D:\Projects\Game\wotmaps\mapviewer\xmlconverter\xmlconverter\xmlconverter\bin\Release\xmlconverter.exe
+D:\Projects\Game\wotmaps\mapviewer\xmlconverter\xmlconverter\xmlconverter\bin\Release\xmlconverter.pdb
+D:\Projects\Game\wotmaps\mapviewer\xmlconverter\xmlconverter\xmlconverter\obj\x86\Release\xmlconverter.exe
+D:\Projects\Game\wotmaps\mapviewer\xmlconverter\xmlconverter\xmlconverter\obj\x86\Release\xmlconverter.pdb
