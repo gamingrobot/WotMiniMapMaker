@@ -8,3 +8,8 @@ run makemaps.py
 copy all maps to gridding in
 run gridding.py
 move all out to mapsFinal
+
+Requirements:
+- Python 2.x
+- Python libraries: beautifulsoup4, PIL
+- mogrify (from ImageMagick)
