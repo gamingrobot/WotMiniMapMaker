@@ -13,6 +13,7 @@ Requirements:
 - Python 2.x
 - Python libraries: beautifulsoup4, lxml, PIL
 - mogrify (from ImageMagick)
+- swfextract (part of SWFTools, http://www.swftools.org/)
 
 Linux:
 - Additional requirements:
@@ -21,3 +22,17 @@ Linux:
 - Permissions to execute:
   - imgconverter.sh
   - copyRawMaps.sh
+
+First run:
+- remove FolderHolder.txt files
+- extract icons from path/to/wot/res/packages/gui.pkg/gui/flash/Minimap.swf with swfextract
+  - you need at least base flags and starting points, IDs ~280-350, rename those to:
+    - green.png
+    - gs1.png
+    - gs2.png
+    - gs3.png
+    - red.png
+    - rs1.png
+    - rs2.png
+    - rs3.png
+    - blank.png
