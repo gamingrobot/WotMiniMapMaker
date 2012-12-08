@@ -11,5 +11,13 @@ move all out to mapsFinal
 
 Requirements:
 - Python 2.x
-- Python libraries: beautifulsoup4, PIL
+- Python libraries: beautifulsoup4, lxml, PIL
 - mogrify (from ImageMagick)
+
+Linux:
+- Additional requirements:
+  - unzip
+  - mono
+- Permissions to execute:
+  - imgconverter.sh
+  - copyRawMaps.sh
