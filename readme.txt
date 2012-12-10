@@ -13,19 +13,20 @@ Requirements:
 - Python 2.x
 - Python libraries: beautifulsoup4, lxml, PIL
 - mogrify (from ImageMagick)
-- swfextract (part of SWFTools, http://www.swftools.org/)
+- SWFExtract (part of SWFTools, http://www.swftools.org/)
 
 Linux:
 - Additional requirements:
   - unzip
   - mono
 - Permissions to execute:
+  - makeMiniMaps.sh
   - imgconverter.sh
   - copyRawMaps.sh
 
 First run:
 - remove FolderHolder.txt files
-- extract icons from path/to/wot/res/packages/gui.pkg/gui/flash/Minimap.swf with swfextract
+- extract icons from res/packages/gui.pkg/gui/flash/Minimap.swf with SWFExtract into icon/
   - you need at least base flags and starting points, IDs ~280-350, rename those to:
     - green.png
     - gs1.png
@@ -36,3 +37,5 @@ First run:
     - rs2.png
     - rs3.png
     - blank.png
+- set WoT installation path in makeMiniMaps.sh
+- execute makeMiniMaps.sh
