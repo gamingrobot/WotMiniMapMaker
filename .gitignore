@@ -8,4 +8,5 @@ mapsRaw/
 arena_defs/
 arena_defs_decoded/
 icon/
-gridding/
+gridding/in/
+gridding/out/
