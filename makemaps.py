@@ -155,7 +155,7 @@ def readxml(filename):
 
 def convertScaleToXY(input, scale):
     inx, iny = string.split(input)
-    inx, iny = int(round(float(inx))), int(round(float(iny)))
+    inx, iny = int(round(float(inx.replace(',', '.')))), int(round(float(iny.replace(',', '.'))))
     #0-1000 instead of -500-500
     inx += scale
     iny += scale
