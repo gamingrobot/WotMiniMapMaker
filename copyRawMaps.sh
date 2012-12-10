@@ -6,7 +6,7 @@ elif [ $# -ge 1 ]; then
 	for file in "$1"res/packages/[0-9][0-9]_*.pkg
 	do
 		BN=`basename "${file}" .pkg`
-		unzip -j "${file}" spaces/* -x *.chunk *.cdata -d mapsRaw/${BN}
+		unzip -j "$file" spaces/*/mmap.dds -d mapsRaw/"$BN"
 	done
 
 	while [ $# -gt 1 ]; do
