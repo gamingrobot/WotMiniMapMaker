@@ -39,7 +39,7 @@ def readxml(filename):
     x1, y1 = float(x1), float(y1)
     #print x1, y1
 
-    if math.fabs(x2) != math.fabs(x1) or math.fabs(y2) != math.fabs(y1):
+    if math.fabs(x1) != math.fabs(y2) or math.fabs(x2) != math.fabs(y1):
         print "could not process " + str(filename)
         return
 
@@ -85,7 +85,7 @@ def readxml(filename):
                 inx, iny = convertScaleToXY(spawn.contents[0], x1)
                 background.paste(foreground, (int(inx), int(500 - iny)), foreground)
                 counter += 1
-        background.save("maps/" + filename + "_" + "ctf" + ".png")
+        background.save("gridding/in/" + filename + "_" + "ctf" + ".png")
 
     if ass != None:
         #print "ASS"
@@ -118,7 +118,7 @@ def readxml(filename):
                 inx, iny = convertScaleToXY(spawn.contents[0], x1)
                 background.paste(foreground, (int(inx), int(500 - iny)), foreground)
                 counter += 1
-        background.save("maps/" + filename + "_" + "ass" + ".png")
+        background.save("gridding/in/" + filename + "_" + "ass" + ".png")
 
     if dom != None:
         #print "DOM"
@@ -150,12 +150,12 @@ def readxml(filename):
             inx, iny = convertScaleToXY(spawn.contents[0], x1)
             background.paste(foreground, (int(inx), int(500 - iny)), foreground)
             counter += 1
-        background.save("maps/" + filename + "_" + "dom" + ".png")
+        background.save("gridding/in/" + filename + "_" + "dom" + ".png")
 
 
 def convertScaleToXY(input, scale):
     inx, iny = string.split(input)
-    inx, iny = int(round(float(inx))), int(round(float(iny)))
+    inx, iny = int(round(float(inx.replace(',', '.')))), int(round(float(iny.replace(',', '.'))))
     #0-1000 instead of -500-500
     inx += scale
     iny += scale
