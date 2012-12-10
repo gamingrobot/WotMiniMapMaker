@@ -39,7 +39,7 @@ def readxml(filename):
     x1, y1 = float(x1), float(y1)
     #print x1, y1
 
-    if math.fabs(x2) != math.fabs(x1) or math.fabs(y2) != math.fabs(y1):
+    if math.fabs(x1) != math.fabs(y2) or math.fabs(x2) != math.fabs(y1):
         print "could not process " + str(filename)
         return
 
