@@ -1,0 +1,13 @@
+.directory
+*~
+Thumbs.db
+Desktop.ini
+.DS_Store
+xmlconverter/*
+mapsRaw/
+arena_defs/
+arena_defs_decoded/
+icon/
+gridding/in/
+gridding/out/
+jpg/
