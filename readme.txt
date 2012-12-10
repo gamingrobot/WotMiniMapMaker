@@ -23,6 +23,7 @@ Linux:
   - makeMiniMaps.sh
   - imgconverter.sh
   - copyRawMaps.sh
+  - compressMaps.sh
 
 First run:
 - remove FolderHolder.txt files

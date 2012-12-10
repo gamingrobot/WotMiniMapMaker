@@ -26,3 +26,5 @@ mono xmlconverter.exe arena_defs/ arena_defs_decoded/
 python ./makemaps.py
 
 python ./gridding/gridder.py
+
+./compressMaps.sh
