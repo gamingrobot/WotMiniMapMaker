@@ -85,7 +85,7 @@ def readxml(filename):
                 inx, iny = convertScaleToXY(spawn.contents[0], x1)
                 background.paste(foreground, (int(inx), int(500 - iny)), foreground)
                 counter += 1
-        background.save("maps/" + filename + "_" + "ctf" + ".png")
+        background.save("gridding/in/" + filename + "_" + "ctf" + ".png")
 
     if ass != None:
         #print "ASS"
@@ -118,7 +118,7 @@ def readxml(filename):
                 inx, iny = convertScaleToXY(spawn.contents[0], x1)
                 background.paste(foreground, (int(inx), int(500 - iny)), foreground)
                 counter += 1
-        background.save("maps/" + filename + "_" + "ass" + ".png")
+        background.save("gridding/in/" + filename + "_" + "ass" + ".png")
 
     if dom != None:
         #print "DOM"
@@ -150,7 +150,7 @@ def readxml(filename):
             inx, iny = convertScaleToXY(spawn.contents[0], x1)
             background.paste(foreground, (int(inx), int(500 - iny)), foreground)
             counter += 1
-        background.save("maps/" + filename + "_" + "dom" + ".png")
+        background.save("gridding/in/" + filename + "_" + "dom" + ".png")
 
 
 def convertScaleToXY(input, scale):
