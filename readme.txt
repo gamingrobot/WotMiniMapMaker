@@ -14,20 +14,20 @@ First time:
 - set WoT installation path in makeMiniMaps.sh (Linux only)
 
 Usage (Windows):
-unpack all packages and put the maps into mapsRaw
-remove all .chunk .cdata files via del /S *.chunk from the mapsRaw directory
-run imgconverter.bat to convert all dds to png
-then copy all arena_defs from res/scripts/arena_defs
-run fixdefnames.py to fix the arena_defs names
-run usexmlconverter.bat to convert all xml to readable
-run makemaps.py
-copy all maps to gridding in
-run gridding.py
-move all out to mapsFinal
+- unpack all packages and put the maps into mapsRaw
+- remove all .chunk .cdata files via del /S *.chunk from the mapsRaw directory
+- run imgconverter.bat to convert all dds to png
+- copy all arena_defs from res/scripts/arena_defs
+- run fixdefnames.py to fix the arena_defs names
+- run usexmlconverter.bat to convert all xml to readable
+- run makemaps.py
+- copy all maps to gridding in
+- run gridding.py
+- move all out to mapsFinal
 
 Usage (Linux):
- - execute makeMiniMaps.sh
- - optionally execute renameJpg.sh
+- execute makeMiniMaps.sh
+- optionally execute renameJpg.sh
 
 Requirements:
 - Python 2.x

@@ -56,7 +56,6 @@ do
 	"ass") MODE="_assault"; ;;
 	esac
 
-	echo "renaming maps..."
 	mv -v "$file" "./jpg/$NAME$MODE.jpg"
 
 done
