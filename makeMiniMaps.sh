@@ -18,6 +18,7 @@ cp -v "$WOT"res/scripts/arena_defs/* ./arena_defs/
 rm -vrf ./arena_defs/_common_.xml
 rm -vrf ./arena_defs/_default_.xml
 rm -vrf ./arena_defs/_list_.xml
+rm -vrf ./arena_defs/00_tank_tutorial.xml
 
 python ./fixdefnames.py
 
