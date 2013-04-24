@@ -44,6 +44,7 @@ do
 	"45") NAME="highway"; ;;
 	"47") NAME="serene_coast"; ;;
 	"51") NAME="dragon_ridge"; ;;
+	"60") NAME="pearl_river"; ;;
 	*)
 		echo "WARNING: Unknown map ID" $ID
 		continue;
