@@ -90,12 +90,23 @@ def readxml(filename):
     if ass != None:
         #print "ASS"
         background = Image.open("mapsRaw/" + filename + "/mmap.png")
-        BasePosition = ass.find("teamBasePositions").find("team1").find(re.compile("^position"))
-        #print BasePosition
-        #scale and place on map
-        foreground = Image.open("icon/" + 'green' + ".png")
-        inx, iny = convertScaleToXY(BasePosition.contents[0], x1)
-        background.paste(foreground, (int(inx), int(500 - iny)), foreground)
+        teamBasePositions = ass.find("teamBasePositions")
+        if teamBasePositions != None:
+            team1 = teamBasePositions.find("team1")
+            team2 = teamBasePositions.find("team2")
+            team1Position = team1.find(re.compile("^position"))
+            team2Position = team2.find(re.compile("^position"))
+            #print team1Position, team2Position
+            #first team: scale and place on map
+            if team1Position != None:
+                foreground = Image.open("icon/" + 'green' + ".png")
+                inx, iny = convertScaleToXY(team1Position.contents[0], x1)
+                background.paste(foreground, (int(inx), int(500 - iny)), foreground)
+            #put second team in
+            if team2Position != None:
+                foreground = Image.open("icon/" + 'red' + ".png")
+                inx, iny = convertScaleToXY(team2Position.contents[0], x1)
+                background.paste(foreground, (int(inx), int(500 - iny)), foreground)
         #find spawn points
         teamSpawnPoints = ass.find("teamSpawnPoints")
         if teamSpawnPoints != None:
