@@ -45,6 +45,7 @@ do
 	"47") NAME="serene_coast"; ;;
 	"51") NAME="dragon_ridge"; ;;
 	"60") NAME="pearl_river"; ;;
+	"63") NAME="tundra"; ;;
 	"73") NAME="sacred_valley"; ;;
 	"85") NAME="severogorsk"; ;;
 	*)
