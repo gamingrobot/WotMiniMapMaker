@@ -40,6 +40,7 @@ do
 	"38") NAME="arctic_region"; ;;
 	"39") NAME="south_coast"; ;;
 	"42") NAME="port"; ;;
+	"43") NAME="northwest"; ;;
 	"44") NAME="live_oaks"; ;;
 	"45") NAME="highway"; ;;
 	"47") NAME="serene_coast"; ;;
