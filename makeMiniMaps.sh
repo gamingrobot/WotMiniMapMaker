@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# WoT installation directory
-WOT="/media/Acer/Pelit/World of Tanks/"
+# WoT installation directory, may contain spaces
+WOT="/path/to/World of Tanks/"
 
 # remove old files
 rm -rf ./mapsRaw/*
@@ -12,12 +12,13 @@ rm -rf ./gridding/out/*
 
 ./copyRawMaps.sh "$WOT"
 
+./imgconverter.sh
+
 cp -v "$WOT"res/scripts/arena_defs/* ./arena_defs/
 rm -vrf ./arena_defs/_common_.xml
 rm -vrf ./arena_defs/_default_.xml
 rm -vrf ./arena_defs/_list_.xml
-
-./imgconverter.sh
+rm -vrf ./arena_defs/00_tank_tutorial.xml
 
 python ./fixdefnames.py
 

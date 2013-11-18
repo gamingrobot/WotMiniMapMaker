@@ -6,14 +6,12 @@ import string
 import math
 import Image
 
+# both x and y dimensions are equal
+targetMapSize = 500.0
 
 def main():
     for filename in os.listdir("arena_defs_decoded"):
         readxml(filename)
-    #readxml('siegfried_line_14.xml')
-    #readxml('malinovka_02.xml')
-    #readxml('komarin_15.xml')
-    #readxml('westfeld_23.xml')
 
 
 def readxml(filename):
@@ -29,18 +27,17 @@ def readxml(filename):
 
     soup = BeautifulSoup(data, 'xml')
 
-    bottomLeft = soup.find("bottomLeft")
-    upperRight = soup.find("upperRight")
-    bottomLeft = bottomLeft.contents
-    upperRight = upperRight.contents
+    bottomLeft = soup.find("bottomLeft").contents
+    upperRight = soup.find("upperRight").contents
     x2, y2 = string.split(bottomLeft[0])
     x1, y1 = string.split(upperRight[0])
     x2, y2 = float(x2), float(y2)
     x1, y1 = float(x1), float(y1)
-    #print x1, y1
 
-    if math.fabs(x1) != math.fabs(y2) or math.fabs(x2) != math.fabs(y1):
-        print "could not process " + str(filename)
+    oldBoundingBox = [x1, x2, y1, y2]
+
+    if (math.fabs(x1) + math.fabs(x2)) != (math.fabs(y1) + math.fabs(y2)):
+        print "Could not process " + str(filename) + ": map dimensions do not match!"
         return
 
     ctf = soup.find("ctf")
@@ -57,12 +54,12 @@ def readxml(filename):
         #print team1Position, team2Position
         #scale and place on map
         foreground = Image.open("icon/" + 'green' + ".png")
-        inx, iny = convertScaleToXY(team1Position.contents[0], x1)
-        background.paste(foreground, (int(inx), int(500 - iny)), foreground)
+        inx, iny = convertScaleToXY(team1Position.contents[0], oldBoundingBox)
+        background.paste(foreground, (int(inx), int(targetMapSize - iny)), foreground)
         #put second team in
         foreground = Image.open("icon/" + 'red' + ".png")
-        inx, iny = convertScaleToXY(team2Position.contents[0], x1)
-        background.paste(foreground, (int(inx), int(500 - iny)), foreground)
+        inx, iny = convertScaleToXY(team2Position.contents[0], oldBoundingBox)
+        background.paste(foreground, (int(inx), int(targetMapSize - iny)), foreground)
         #do spawn points
         teamSpawnPoints = ctf.find("teamSpawnPoints")
         if teamSpawnPoints != None:
@@ -75,27 +72,38 @@ def readxml(filename):
             counter = 1
             for spawn in team1SpawnPoint:
                 foreground = Image.open("icon/" + 'gs' + str(counter) + ".png")
-                inx, iny = convertScaleToXY(spawn.contents[0], x1)
-                background.paste(foreground, (int(inx), int(500 - iny)), foreground)
+                inx, iny = convertScaleToXY(spawn.contents[0], oldBoundingBox)
+                background.paste(foreground, (int(inx), int(targetMapSize - iny)), foreground)
                 counter += 1
             #team2 second
             counter = 1
             for spawn in team2SpawnPoint:
                 foreground = Image.open("icon/" + 'rs' + str(counter) + ".png")
-                inx, iny = convertScaleToXY(spawn.contents[0], x1)
-                background.paste(foreground, (int(inx), int(500 - iny)), foreground)
+                inx, iny = convertScaleToXY(spawn.contents[0], oldBoundingBox)
+                background.paste(foreground, (int(inx), int(targetMapSize - iny)), foreground)
                 counter += 1
         background.save("gridding/in/" + filename + "_" + "ctf" + ".png")
 
     if ass != None:
         #print "ASS"
         background = Image.open("mapsRaw/" + filename + "/mmap.png")
-        BasePosition = ass.find("teamBasePositions").find("team1").find(re.compile("^position"))
-        #print BasePosition
-        #scale and place on map
-        foreground = Image.open("icon/" + 'green' + ".png")
-        inx, iny = convertScaleToXY(BasePosition.contents[0], x1)
-        background.paste(foreground, (int(inx), int(500 - iny)), foreground)
+        teamBasePositions = ass.find("teamBasePositions")
+        if teamBasePositions != None:
+            team1 = teamBasePositions.find("team1")
+            team2 = teamBasePositions.find("team2")
+            team1Position = team1.find(re.compile("^position"))
+            team2Position = team2.find(re.compile("^position"))
+            #print team1Position, team2Position
+            #first team: scale and place on map
+            if team1Position != None:
+                foreground = Image.open("icon/" + 'green' + ".png")
+                inx, iny = convertScaleToXY(team1Position.contents[0], oldBoundingBox)
+                background.paste(foreground, (int(inx), int(targetMapSize - iny)), foreground)
+            #put second team in
+            if team2Position != None:
+                foreground = Image.open("icon/" + 'red' + ".png")
+                inx, iny = convertScaleToXY(team2Position.contents[0], oldBoundingBox)
+                background.paste(foreground, (int(inx), int(targetMapSize - iny)), foreground)
         #find spawn points
         teamSpawnPoints = ass.find("teamSpawnPoints")
         if teamSpawnPoints != None:
@@ -108,15 +116,15 @@ def readxml(filename):
             counter = 1
             for spawn in team1SpawnPoint:
                 foreground = Image.open("icon/" + 'gs' + str(counter) + ".png")
-                inx, iny = convertScaleToXY(spawn.contents[0], x1)
-                background.paste(foreground, (int(inx), int(500 - iny)), foreground)
+                inx, iny = convertScaleToXY(spawn.contents[0], oldBoundingBox)
+                background.paste(foreground, (int(inx), int(targetMapSize - iny)), foreground)
                 counter += 1
             #team2 second
             counter = 1
             for spawn in team2SpawnPoint:
                 foreground = Image.open("icon/" + 'rs' + str(counter) + ".png")
-                inx, iny = convertScaleToXY(spawn.contents[0], x1)
-                background.paste(foreground, (int(inx), int(500 - iny)), foreground)
+                inx, iny = convertScaleToXY(spawn.contents[0], oldBoundingBox)
+                background.paste(foreground, (int(inx), int(targetMapSize - iny)), foreground)
                 counter += 1
         background.save("gridding/in/" + filename + "_" + "ass" + ".png")
 
@@ -127,8 +135,8 @@ def readxml(filename):
         #print controlPoint
         #scale and place on map
         foreground = Image.open("icon/" + 'blank' + ".png")
-        inx, iny = convertScaleToXY(controlPoint.contents[0], x1)
-        background.paste(foreground, (int(inx), int(500 - iny)), foreground)
+        inx, iny = convertScaleToXY(controlPoint.contents[0], oldBoundingBox)
+        background.paste(foreground, (int(inx), int(targetMapSize - iny)), foreground)
         #find spawn points
         teamSpawnPoints = dom.find("teamSpawnPoints")
         team1 = teamSpawnPoints.find("team1")
@@ -140,34 +148,40 @@ def readxml(filename):
         counter = 1
         for spawn in team1SpawnPoint:
             foreground = Image.open("icon/" + 'gs' + str(counter) + ".png")
-            inx, iny = convertScaleToXY(spawn.contents[0], x1)
-            background.paste(foreground, (int(inx), int(500 - iny)), foreground)
+            inx, iny = convertScaleToXY(spawn.contents[0], oldBoundingBox)
+            background.paste(foreground, (int(inx), int(targetMapSize - iny)), foreground)
             counter += 1
         #team2 second
         counter = 1
         for spawn in team2SpawnPoint:
             foreground = Image.open("icon/" + 'rs' + str(counter) + ".png")
-            inx, iny = convertScaleToXY(spawn.contents[0], x1)
-            background.paste(foreground, (int(inx), int(500 - iny)), foreground)
+            inx, iny = convertScaleToXY(spawn.contents[0], oldBoundingBox)
+            background.paste(foreground, (int(inx), int(targetMapSize - iny)), foreground)
             counter += 1
         background.save("gridding/in/" + filename + "_" + "dom" + ".png")
 
 
-def convertScaleToXY(input, scale):
+def convertScaleToXY(input, oldScale):
+    # oldScale is an array with values x1, x2, y1, y2
+    newScale = targetMapSize # read value from global
     inx, iny = string.split(input)
-    inx, iny = int(round(float(inx.replace(',', '.')))), int(round(float(iny.replace(',', '.'))))
-    #0-1000 instead of -500-500
-    inx += scale
-    iny += scale
-    #scale to 500x500
-    doublescale = scale * 2
-    divscale = doublescale / 500.0
-    inx /= divscale
-    iny /= divscale
-    #fix icon size
-    inx -= 24
-    iny += 24
-    return inx, iny
+    inx, iny = round(float(inx.replace(',', '.'))), round(float(iny.replace(',', '.')))
+
+    # move coordinates to start from (0,0)
+    inx = inx - min(oldScale[0],oldScale[1])
+    iny = iny - min(oldScale[2],oldScale[3])
+
+    oldMaxX = math.fabs(oldScale[0]) + math.fabs(oldScale[1])
+    oldMaxY = math.fabs(oldScale[2]) + math.fabs(oldScale[3])
+
+    x = inx / oldMaxX * newScale
+    y = iny / oldMaxY * newScale
+
+    # set icon (64x64 pixels) center at coordinates
+    x -= 32.0
+    y += 32.0
+
+    return float(x), float(y)
 
 
 if __name__ == '__main__':
