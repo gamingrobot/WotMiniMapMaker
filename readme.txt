@@ -1,3 +1,5 @@
+http://gamingrobot.net/projects/wotminimaps/
+
 First time:
 - remove FolderHolder.txt files
 - extract icons from res/packages/gui.pkg/gui/flash/Minimap.swf with SWFExtract into icon/
