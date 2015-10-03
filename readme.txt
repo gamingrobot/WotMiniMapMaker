@@ -1,4 +1,6 @@
-http://gamingrobot.net/projects/wotminimaps/
+Out of Date
+
+http://lithium.gamingrobot.net/projects/wotminimaps/
 
 First time:
 - remove FolderHolder.txt files
